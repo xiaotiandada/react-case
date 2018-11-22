@@ -1,44 +1,75 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# todoLIst
 
-## Available Scripts
+## 简易版-todoList
 
-In the project directory, you can run:
+```js
+import React, { Component } from "react";
+// import logo from "./logo.svg";
+import "./App.css";
 
-### `npm start`
+class App extends Component {
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  // 状态
+  constructor(props){
+    super(props)
+    this.state = {
+      list: [],  // 列表数据
+      inputValue: ''  // 输入框数据
+    }
+  }
+  
+  // 添加列表数据
+  addList(){
+    // es6 语法
+    this.setState({
+      list: [...this.state.list, this.state.inputValue],
+      inputValue: ''
+    })
+  }
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+  // 改变inputValue
+  changeInput(e) {
+    // 目标值
+    let value = e.target.value
+    this.setState({
+      inputValue: value,
+    })
+  }
 
-### `npm test`
+  // 删除列表数据
+  delList(index) {
+    // 拷贝值 删除
+    let list = [...this.state.list]
+    list.splice(index, 1)
+    this.setState({
+      list
+    })
+  }
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  render() {
+    return (
+      <div>
+      <div>
+        // 数据绑定  改变事件绑定this
+        <input value={this.state.inputValue} onChange={this.changeInput.bind(this)} type="text"/>
+        // 添加事件 绑定this
+        <button onClick={this.addList.bind(this)}>添加</button>
+      </div>
+        <ul>
+        {
+          this.state.list.map((item,index) => {
+            return (
+              // 删除事件 绑定this 传index
+              <li key={index} onClick={this.delList.bind(this, index)}>{item}</li>
+            )
+          })
+        }
+        </ul>
+      </div>
+    );
+  }
+}
 
-### `npm run build`
+export default App;
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```

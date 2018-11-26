@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import Item from './Item'
 // import logo from "./logo.svg";
 import "./App.css";
 
@@ -10,6 +11,10 @@ class App extends Component {
       list: [],
       inputValue: ''
     }
+
+    this.addList = this.addList.bind(this)
+    this.changeInput = this.changeInput.bind(this)
+    this.delList = this.delList.bind(this)
   }
   
   addList(){
@@ -34,23 +39,36 @@ class App extends Component {
     })
   }
 
-  render() {
+  getHead() {
     return (
       <div>
-      <div>
-        <input value={this.state.inputValue} onChange={this.changeInput.bind(this)} type="text"/>
-        <button onClick={this.addList.bind(this)}>添加</button>
+        <input value={this.state.inputValue} onChange={this.changeInput} type="text"/>
+        <button className='head-button' onClick={this.addList}>添加</button>
       </div>
-        <ul>
-        {
-          this.state.list.map((item,index) => {
-            return (
-              <li key={index} onClick={this.delList.bind(this, index)}>{item}</li>
-            )
-          })
-        }
-        </ul>
-      </div>
+    ) 
+  }
+
+  getItem() {
+    return (
+      this.state.list.map((item,index) => {
+        return (
+          <Item 
+            delList={this.delList} 
+            key={index} 
+            content={item} 
+            index={index} 
+          />
+        )
+      })
+    )
+  }
+
+  render() {
+    return (
+      <Fragment>
+        {this.getHead()}
+        <ul>{this.getItem()}</ul>
+      </Fragment>
     );
   }
 }

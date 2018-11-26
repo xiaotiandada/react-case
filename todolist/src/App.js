@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import Item from './Item'
-// import logo from "./logo.svg";
+import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
@@ -41,9 +41,12 @@ class App extends Component {
 
   getHead() {
     return (
-      <div>
-        <input value={this.state.inputValue} onChange={this.changeInput} type="text"/>
+      <div className='head-header'>
+        <div className="head-content">
+        <img className='head-logo' src={logo} alt=""/>
+        <input className='head-input' value={this.state.inputValue} onChange={this.changeInput} type="text"/>
         <button className='head-button' onClick={this.addList}>添加</button>
+        </div>
       </div>
     ) 
   }
@@ -67,7 +70,7 @@ class App extends Component {
     return (
       <Fragment>
         {this.getHead()}
-        <ul>{this.getItem()}</ul>
+        <ul className='item'>{this.getItem()}</ul>
       </Fragment>
     );
   }

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 class Item extends Component {
 
@@ -15,7 +15,9 @@ class Item extends Component {
   render() {
     const { content } = this.props;
     return (
-      <li onClick={this.delItem}>{content}</li>
+      <Fragment>
+        <li>{content}<button onClick={this.delItem}>删除</button></li>
+      </Fragment>
     )
   }
 }

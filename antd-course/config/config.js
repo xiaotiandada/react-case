@@ -1,7 +1,7 @@
 export default {
   singular: true,
   plugins: [
-    ['umi-plugins-react', {
+    ['umi-plugin-react', {
       // 
     }]
   ],

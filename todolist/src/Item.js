@@ -4,6 +4,9 @@ class Item extends Component {
 
   constructor(props){
     super(props)
+    this.state = {
+      status: false
+    }
     this.delItem = this.delItem.bind(this)
   }
 
@@ -12,11 +15,21 @@ class Item extends Component {
     delList(index)
   }
 
-  render() {
+  getItem(){
     const { content } = this.props;
+
+    return(
+      <li>
+        <span contenteditable={this.state.status}>{content}</span>
+        <button onClick={this.delItem}>删除</button>
+      </li>
+    )
+  }
+
+  render() {
     return (
       <Fragment>
-        <li>{content}<button onClick={this.delItem}>删除</button></li>
+      {this.getItem()}
       </Fragment>
     )
   }

@@ -44,7 +44,6 @@ export default class BasicLayout extends Component {
       </Layout>
     </Layout>
     )
-  }
-  
+  } 
 }
 
